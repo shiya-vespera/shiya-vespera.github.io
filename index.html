@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sharan Cencia — Digital Architect</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Cormorant+Garamond:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* COLOR VARIABLES (Modern Glassmorphism / Depth) */
+        :root {
+            --color-bg: #1F2833; 
+            --color-card: rgba(31, 40, 51, 0.7); 
+            --color-accent-blue: #66FCF1; 
+            --color-text-main: #E0FBFC; 
+            --color-text-secondary: #C5C6C7; 
+            --font-main: 'Inter', sans-serif;
+            --font-elegant: 'Cormorant Garamond', serif;
+            --transition-speed: 0.6s;
+            --perspective: 1000px; 
+        }
+
+        /* GLOBAL STYLES */
+        html { scroll-behavior: smooth; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: var(--font-main);
+            background-color: var(--color-bg);
+            color: var(--color-text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: linear-gradient(135deg, #1F2833 25%, #2a3440 25%, #2a3440 50%, #1F2833 50%, #1F2833 75%, #2a3440 75%, #2a3440 100%);
+            background-size: 80px 80px;
+            animation: move-bg 60s linear infinite;
+        }
+
+        @keyframes move-bg {
+            from { background-position: 0 0; }
+            to { background-position: 800px 800px; }
+        }
+
+        /* UTILITIES */
+        /* KEY CHANGE 1: Removed max-width limit and set small padding to define the corner gap for ALL content */
+        .container { 
+            max-width: 100%; /* Full width */
+            margin: 0 auto; 
+            padding: 0 2%; /* Corner gap on sides */
+        } 
+        
+        .section { padding: 120px 0; min-height: 100vh; position: relative; z-index: 1; } 
+        
+        /* 3D-Like Card Base - Key to the Aesthetic */
+        .glass-card {
+            background: var(--color-card);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(102, 252, 241, 0.15); 
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(102, 252, 241, 0.1);
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+            transform-style: preserve-3d; 
+            transform: translateZ(0); 
+        }
+        
+        /* Interactive 3D Hover Effect */
+        .glass-card:hover {
+            transform: translateZ(20px) rotateY(1deg);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px var(--color-accent-blue);
+        }
+
+        /* --- NAVBAR (Corner Alignment - Blue Line) --- */
+        header {
+            background: rgba(31, 40, 51, 0.9);
+            padding: 15px 0;
+            position: sticky; top: 0; z-index: 100;
+            backdrop-filter: blur(8px);
+            border-bottom: 2px solid var(--color-accent-blue); 
+        }
+        
+        .navbar { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        } 
+        
+        .nav-logo {
+            font-size: 1.8rem; font-family: var(--font-elegant);
+            color: var(--color-accent-blue); text-decoration: none;
+            letter-spacing: 2px;
+            display: flex; 
+            align-items: center; 
+        }
+        .nav-logo i { 
+            margin-right: 8px;
+            font-size: 1.5rem;
+        }
+        
+        .nav-links a {
+            color: var(--color-text-secondary); text-decoration: none; 
+            margin-left: 30px; 
+            padding: 5px 0;
+            transition: var(--transition-speed);
+            border-bottom: 2px solid transparent;
+            font-size: 1.1rem; 
+        }
+        .nav-links a:first-child {
+            margin-left: 0; 
+        }
+        .nav-links a:hover { 
+            color: var(--color-accent-blue); 
+            border-bottom-color: var(--color-accent-blue);
+        }
+
+        /* ------------------------------------------------ */
+        /* --- HOME SECTION STYLES --- */
+        /* ------------------------------------------------ */
+        #home { 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            padding: 60px 0; /* Gap from Navbar and below */
+            min-height: auto; 
+            perspective: var(--perspective); 
+        }
+
+        .home-content { 
+            /* KEY CHANGE 2: Set width to 100% to fill the new, wider .container */
+            width: 85%; 
+            max-width: 100%; 
+            height: auto; 
+            
+            /* Sizing to fit in one screen */
+            max-height: calc(100vh - 120px); 
+            min-height: 400px; 
+        
+            margin: 0 auto; 
+            
+            display: flex; 
+            flex-direction: row; 
+            justify-content: space-between; 
+            align-items: center; 
+            
+            gap: 60px; 
+            padding: 40px 80px; 
+            overflow: hidden; 
+        }
+        /* ------------------------------------------------ */
+        /* ------------------------------------------------ */
+
+        .home-text { 
+            flex: 1; 
+            text-align: left; 
+        }
+        .home-text h1 { 
+            font-size: 3.2rem; 
+            margin-bottom: 8px;
+            font-family: var(--font-elegant); font-weight: 700;
+        }
+        .intro-line { font-size: 1.1rem; color: var(--color-text-secondary); } 
+
+        /* Typing Animation Area */
+        .typed-text-style {
+            font-size: 1.8rem; 
+            color: var(--color-accent-blue);
+            min-height: 1.2em;
+            font-family: var(--font-elegant);
+            font-weight: 700;
+        }
+        .cursor { animation: blink 1s step-end infinite; display: inline-block; }
+        @keyframes blink { from, to { opacity: 1; } 50% { opacity: 0; } }
+
+        /* Profile Photo Size (Sized to fit the shorter card) */
+        .profile-photo {
+            width: 300px; 
+            height: 300px; 
+            flex-shrink: 0; 
+            border-radius: 50%; object-fit: cover;
+            object-position: top;
+            border: 4px solid var(--color-accent-blue);
+            box-shadow: 0 0 20px rgba(102, 252, 241, 0.8);
+            transition: var(--transition-speed);
+        }
+        .profile-photo:hover {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+        }
+
+        /* --- SECTION HEADERS --- */
+        h2 { 
+            font-size: 3rem; text-align: center; margin-bottom: 60px;
+            font-family: var(--font-elegant);
+            color: var(--color-accent-blue);
+            text-shadow: 0 0 5px rgba(102, 252, 241, 0.5);
+        }
+
+        /* --- ABOUT & PORTFOLIO CONTENT --- */
+        .about-content {
+            padding: 50px;
+            /* No max-width here means it will stretch with the new .container */
+            margin: 0 auto;
+        }
+        .about-content h3 {
+            color: var(--color-accent-blue);
+            margin-top: 35px;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+            font-family: var(--font-elegant);
+        }
+        .about-content p { 
+            margin-bottom: 20px; 
+            color: var(--color-text-secondary); 
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        .about-content strong { color: var(--color-text-main); }
+        .about-content .declaration { font-style: italic; font-size: 1em; margin-top: 40px; border-top: 1px solid rgba(102, 252, 241, 0.1); padding-top: 20px; }
+        
+        .about-content ul {
+            list-style: none; 
+            padding-left: 0;
+            margin-bottom: 20px;
+        }
+        .about-content ul li {
+            margin-bottom: 5px;
+            padding-left: 1.5em; 
+            text-indent: -1.5em; 
+        }
+        .about-content ul li::before {
+            content: "•";
+            color: var(--color-accent-blue);
+            font-weight: bold;
+            display: inline-block; 
+            width: 1.5em;
+        }
+
+
+        /* --- SKILLS SECTION --- */
+        .skills-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;
+            perspective: var(--perspective);
+        }
+        .skill-item {
+            padding: 30px;
+            transform: translateZ(0); 
+        }
+        
+        .skill-item:hover {
+            transform: translateZ(30px) rotateX(1deg); 
+        }
+        
+        .skill-item h4 { 
+            display: flex; align-items: center;
+            color: var(--color-accent-blue); 
+            margin-bottom: 8px; 
+            font-family: var(--font-elegant);
+            font-size: 1.3rem;
+        }
+        .skill-item h4 i {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+
+        .skill-bar-container { background: #333; height: 8px; border-radius: 4px; margin-top: 15px; }
+        .skill-bar {
+            height: 100%; width: 0%; border-radius: 4px;
+            background: linear-gradient(90deg, #66FCF1, #45A29E);
+            transition: width 1.5s ease-out;
+            box-shadow: 0 0 10px var(--color-accent-blue);
+        }
+        .skill-item small { display: block; text-align: right; margin-top: 5px; color: var(--color-accent-blue); font-weight: 700; }
+
+        /* --- PROJECTS SECTION --- */
+        .project-gallery { 
+            display: grid; grid-template-columns: 1fr; 
+            gap: 40px;
+            perspective: var(--perspective);
+        }
+        .project-card {
+            padding: 40px;
+            border-left: 4px solid var(--color-accent-blue);
+        }
+        .project-card h3 { color: var(--color-text-main); margin-bottom: 15px; font-family: var(--font-elegant); font-size: 1.8rem; }
+        .project-card p { color: var(--color-text-secondary); }
+        
+        .project-images { 
+            display: flex; gap: 15px; margin-bottom: 20px; 
+            transform-style: preserve-3d;
+        }
+        .project-img { 
+            width: 48%; border-radius: 8px; object-fit: cover; 
+            border: 1px solid rgba(102, 252, 241, 0.3);
+            transition: transform var(--transition-speed);
+        }
+        .project-card:hover .project-img:first-child { transform: translateZ(10px) translateX(-5px); }
+        .project-card:hover .project-img:last-child { transform: translateZ(10px) translateX(5px); }
+
+
+        /* --- CONTACT SECTION --- */
+        .contact-content { 
+            display: flex; justify-content: space-between; gap: 80px; 
+            padding: 80px;
+        }
+        .contact-form, .contact-info { flex: 1; }
+
+        .contact-info h3 { 
+            color: var(--color-accent-blue); 
+            margin-bottom: 30px; 
+            font-size: 2rem;
+            font-family: var(--font-elegant);
+        }
+        .contact-info p { 
+            margin-bottom: 25px; display: flex; align-items: center; 
+            font-size: 1.2rem;
+        }
+        .contact-info p i { color: var(--color-accent-blue); margin-right: 15px; font-size: 1.4rem; }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%; padding: 15px; margin-bottom: 20px;
+            background: rgba(31, 40, 51, 0.9);
+            border: 1px solid #45A29E; color: var(--color-text-main);
+            border-radius: 5px; font-family: var(--font-main);
+            transition: var(--transition-speed);
+        }
+        .contact-form input:focus, .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--color-accent-blue);
+            box-shadow: 0 0 15px rgba(102, 252, 241, 0.6);
+        }
+        
+        .action-button {
+            display: inline-block; padding: 15px 40px; border: none;
+            background: var(--color-accent-blue);
+            color: var(--color-bg); font-weight: 700; border-radius: 5px;
+            cursor: pointer; transition: var(--transition-speed);
+            text-transform: uppercase; font-family: var(--font-main);
+            letter-spacing: 1px;
+        }
+        .action-button:hover { 
+            opacity: 0.95; transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(102, 252, 241, 0.8);
+        }
+
+        .social-links { margin-top: 30px; display: flex; gap: 20px; }
+        .social-links a {
+            font-size: 2rem; color: var(--color-accent-blue);
+            transition: var(--transition-speed);
+        }
+        .social-links a:hover { 
+            color: var(--color-text-main); 
+            transform: scale(1.1); 
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center; padding: 30px 0;
+            background: #151A21; color: var(--color-text-secondary);
+        }
+        
+        /* --- MEDIA QUERIES --- */
+        @media (max-width: 900px) {
+            .container {
+                padding: 0 4%; /* Slightly larger padding on small screens for corner gap */
+            }
+            .home-content { 
+                /* On small screens, stack the content vertically */
+                flex-direction: column-reverse; 
+                text-align: center; 
+                gap: 30px; 
+                padding: 40px; 
+                min-height: auto;
+                max-height: none; 
+                width: 100%; 
+            }
+            .profile-photo { width: 200px; height: 200px; }
+            .project-gallery { grid-template-columns: 1fr; }
+            .contact-content { flex-direction: column; gap: 40px; padding: 40px; }
+            .navbar { flex-direction: column; }
+            .nav-links { margin-top: 15px; }
+            .nav-links a { margin: 0 10px; }
+            h1 { font-size: 3rem; }
+            .typed-text-style { font-size: 1.8rem; }
+            .section { padding: 80px 0; min-height: auto; }
+            .glass-card { transform: none !important; } 
+            .glass-card:hover { transform: none !important; }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container navbar">
+            <a href="#home" class="nav-logo">
+                <i class="fas fa-hammer"></i> Vespera (づ｡◕‿‿◕｡)づ
+            </a>
+            
+            <nav class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#about">About me</a>
+                <a href="#skills">skills</a>
+                <a href="#portfolio">portfolio</a>
+                <a href="#project">project</a>
+                <a href="#contact">contact me</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="section">
+            <div class="container glass-card home-content">
+                <div class="home-text">
+                    <h1>Hello, I am <span style="color: var(--color-accent-blue);">Sharan Cencia</span></h1>
+                    
+                    <p class="typed-text-style">
+                        <span id="typed-output"></span><span class="cursor">|</span>
+                    </p>
+                    
+                    <p style="margin-top: 30px; color: var(--color-text-secondary);">
+                        A dedicated developer focused on building professional, scalable, and responsive digital solutions with a commitment to clean, performant code.
+                    </p>
+                    <a href="#portfolio" class="action-button" style="margin-top: 30px;">View Portfolio</a>
+                </div>
+                
+                <div class="home-img-wrap">
+                    <img src="lumina.jpg" alt="Sharan Cencia Profile Photo" class="profile-photo">
+                </div>
+            </div>
+        </section>
+        
+        <section id="about" class="section">
+            <div class="container">
+                <h2>About Me</h2>
+                <div class="glass-card about-content">
+                    <p>I'm Sharan Cencia, a programmer and web developer with a strong focus on creating professional, scalable, and responsive digital solutions. My work is driven by precision, problem-solving, and the goal of delivering high-quality results that meet both user and business needs.Beyond coding, I value continuous learning and staying updated with the latest industry practices and technologies. This mindset allows me to adapt quickly, take on challenges, and provide solutions that are relevant in today’s fast-evolving digital environment.</p>
+                    
+                    <h3><i class="fas fa-user-check"></i> PERSONAL STRENGTHS</h3>
+                    <p><strong>I bring a strong problem-solving mindset,</strong>with the ability to analyze challenges and develop effective solutions. My attention to detail ensures clean, structured code and high-quality outcomes in every project. I adapt quickly to new tools and technologies, while maintaining strong time management skills to meet deadlines efficiently. I value collaboration and clear communication, making me effective in both individual and team environments. With creativity, consistency, and professionalism, I strive to deliver reliable and scalable solutions that add real value.</p>
+                    
+                    <h3><i class="fas fa-smile"></i> HOBBIES</h3>
+                    <p>Listening Music (｡•́‿•̀｡)</p>
+                    <p>Reading Books ✧˖°٩(\^ᴗ\^)۶°˖✧</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="section">
+            <div class="container">
+                <h2>Technical Proficiencies</h2>
+                <div class="skills-grid">
+                    
+                    <div class="skill-item glass-card">
+                        <h4><i class="fab fa-html5"></i> HTML</h4>
+                        <div class="skill-bar-container">
+                            <div class="skill-bar" data-level="97%"></div>
+                        </div>
+                        <small>97%</small>
+                    </div>
+
+                    <div class="skill-item glass-card">
+                        <h4><i class="fas fa-code"></i> C++</h4>
+                        <div class="skill-bar-container">
+                            <div class="skill-bar" data-level="87%"></div>
+                        </div>
+                        <small>87%</small>
+                    </div>
+
+                    <div class="skill-item glass-card">
+                        <h4><i class="fab fa-python"></i> Python</h4>
+                        <div class="skill-bar-container">
+                            <div class="skill-bar" data-level="77%"></div>
+                        </div>
+                        <small>77%</small>
+                    </div>
+
+                    <div class="skill-item glass-card">
+                        <h4><i class="fab fa-js"></i> JavaScript</h4>
+                        <div class="skill-bar-container">
+                            <div class="skill-bar" data-level="77%"></div>
+                        </div>
+                        <small>77%</small>
+                    </div>
+                    
+                    <div class="skill-item glass-card">
+                        <h4><i class="fas fa-terminal"></i> C Programming</h4>
+                        <div class="skill-bar-container">
+                            <div class="skill-bar" data-level="77%"></div>
+                        </div>
+                        <small>77%</small>
+                    </div>
+
+                    <div class="skill-item glass-card">
+                        <h4><i class="fas fa-database"></i> MySQL</h4>
+                        <div class="skill-bar-container">
+                            <div class="skill-bar" data-level="66%"></div>
+                        </div>
+                        <small>66%</small>
+                    </div>
+                    
+                    <div class="skill-item glass-card">
+                        <h4><i class="fab fa-java"></i> Java</h4>
+                        <div class="skill-bar-container">
+                            <div class="skill-bar" data-level="65%"></div>
+                        </div>
+                        <small>65%</small>
+                    </div>
+                    
+                    <div class="skill-item glass-card">
+                        <h4><i class="fas fa-shield-alt"></i> Network Security</h4>
+                        <div class="skill-bar-container">
+                            <div class="skill-bar" data-level="55%"></div>
+                        </div>
+                        <small>55%</small>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio" class="section">
+            <div class="container">
+                <h2>Portfolio & Experience Log</h2>
+                <div class="project-gallery">
+                    
+                    <div class="project-card glass-card">
+                        <h3><i class="fas fa-graduation-cap"></i> EDUCATION</h3>
+                        
+                        <p><strong>St. Theresa Girls College Killinochchi, Sri Lanka:</strong></p>
+                        <p style="margin-left: 20px;">Advanced Level (Eq. to HSC) - Passed out, 2024</p>
+
+                        <p><strong>Yarl International College of Skills Development (PVT) Ltd:</strong></p>
+                        <p style="margin-left: 20px;">Completed a full-time programme in Beauty Culture, including written and practical examinations (2023).</p>
+                        
+                        <p><strong>Apollo Computer Education -Tambaram:</strong></p>
+                        <p style="margin-left: 20px;">Master in Software Applications (MSA), 2025-2026</p>
+                  
+                    </div>
+                    
+                    <div class="project-card glass-card">
+                        <h3><i class="fas fa-cogs"></i> TECHNICAL SKILLS LOG</h3>
+                        <ul>
+                            <li>MS Office, Windows OS</li>
+                            <li>C Programming Language, C++ Programming Language</li>
+                            <li>Core Python & Adv-Python</li>
+                            <li>Java Technology (Core Java, Adv-Java, J2EE, XML)</li>
+                            <li>PHP, MySQL, Ms SQL Server (Database Handling)</li>
+                            <li>.Net Framework (Asp.Net, VB.Net, C#)</li>
+                            <li>IT Foundation & Web Designing (HTML, CSS, XML)</li>
+                        </ul>
+
+                        <h3><i class="fas fa-brain"></i> CORE COMPETENCIES</h3>
+                        <p><strong>Programming:</strong> Python, Java, C, C++</p>
+                        <p><strong>Database Handling:</strong> MySQL, MS SQL</p>
+                        <p>Good Typing Speed and Accuracy, Strong understanding of logic & problem solving.</p>
+                    </div>
+                </div>
+                
+                
+                </div>
+            </div>
+        </section>
+        
+        <section id="project" class="section">
+            <div class="container">
+                <h2>Project Showcase</h2>
+                <div class="glass-card" style="padding: 50px; text-align: center;">
+                    <img src="night.jpg" alt="my project" style="max-width: 100%; height: auto;">
+                    <p style="font-size: 1.2rem; color: var(--color-text-secondary);">
+                    </p>
+                    <i class="fas fa-project-diagram" style="font-size: 3rem; color: var(--color-accent-blue); margin-top: 20px;"></i>
+                </div>
+            </div>
+        </section>
+        
+        <section id="contact" class="section">
+            <div class="container glass-card contact-content">
+                <div class="contact-info">
+                    <h3>Connect With The Architect</h3>
+                    <p><i class="fas fa-envelope"></i><strong>Email:</strong> sharancencia89@email.com</p>
+                    <p><i class="fas fa-phone"></i><strong>Phone:</strong> +91 8248356760</p>
+                    <p><i class="fas fa-map-marker-alt"></i><strong>Address:</strong> Hasthinapuram, Chrompet</p>
+
+                    <div class="social-links">
+                        <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://wa.me/918248356760" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <form class="contact-form" action="#" method="POST">
+                    <h3>Send A Formal Inquiry</h3>
+                    <input type="text" name="name" placeholder="Your Name" required>
+                    <input type="email" name="email" placeholder="Your Email" required>
+                    <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+                    <button type="submit" class="action-button">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Sharan Cencia | Designed with Modern Glassmorphism & Depth.</p>
+    </footer>
+
+    <script>
+        // --- 1. TYPING ANIMATION ---
+        const textToType = ["web-Developer (◕‿◕)", "Programmer :)"];
+        let currentPhrase = 0;
+        let charIndex = 0;
+        const typingSpeed = 100;
+        const erasingSpeed = 50;
+        const newTextDelay = 2000;
+        const typedOutput = document.getElementById('typed-output');
+
+        function type() {
+            if (!typedOutput) return; 
+            if (charIndex < textToType[currentPhrase].length) {
+                typedOutput.textContent += textToType[currentPhrase].charAt(charIndex);
+                charIndex++;
+                setTimeout(type, typingSpeed);
+            } else {
+                setTimeout(erase, newTextDelay);
+            }
+        }
+
+        function erase() {
+            if (!typedOutput) return; 
+            if (charIndex > 0) {
+                typedOutput.textContent = textToType[currentPhrase].substring(0, charIndex - 1);
+                charIndex--;
+                setTimeout(erase, erasingSpeed);
+            } else {
+                currentPhrase = (currentPhrase + 1) % textToType.length;
+                setTimeout(type, typingSpeed);
+            }
+        }
+
+        // --- 2. SKILL BAR ANIMATION (Triggered on scroll) ---
+        function animateSkillBars() {
+            const skillsSection = document.getElementById('skills');
+            if (!skillsSection) return;
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        document.querySelectorAll('.skill-bar').forEach(bar => {
+                            const level = bar.getAttribute('data-level');
+                            setTimeout(() => {
+                                bar.style.width = level;
+                            }, 500);
+                        });
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            observer.observe(skillsSection);
+        }
+
+        // Start everything on page load
+        document.addEventListener("DOMContentLoaded", () => {
+            type();
+            animateSkillBars();
+        });
+    </script>
+</body>
+</html>
